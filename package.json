@@ -1,0 +1,25 @@
+{
+  "name": "@agilatech/gpout",
+  "version": "0.8.0",
+  "description": "Driver for gpout -- controller for a gpio output",
+  "main": "gpout.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agilatech/gpout.git"
+  },
+  "keywords": [
+    "sensor",
+    "gpout",
+    "beaglebone",
+    "raspberry pi"
+  ],
+  "author": "Agilatech <scott@agilatech.com> (http://agilatech.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Agilatech/gpout/issues"
+  },
+  "homepage": "https://github.com/Agilatech/gpout#readme",
+  "dependencies": {
+    "onoff": "*"
+  }
+}
