@@ -11,7 +11,7 @@ module.exports = class Gpout {
     	this.name = "GPOUT";
 		this.type = "gpio";
 
-		this.valueNames  = ["state"];
+		this.valueNames  = ["current"];
 		this.valueTypes  = ["string"];
 		this.values      = ['low'];
  		this.callbacks   = [];
