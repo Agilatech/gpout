@@ -1,6 +1,6 @@
 {
   "name": "@agilatech/gpout",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Driver for gpout -- controller for a gpio output",
   "main": "gpout.js",
   "repository": {
