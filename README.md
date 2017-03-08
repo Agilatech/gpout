@@ -1,4 +1,4 @@
-##Node class module for GpOut Sensor
+##Node class module for GPIO output driver
 
 #####This class module should work on any Linux platform, and has been thoroughly tested on BBB
 
@@ -17,8 +17,14 @@ git clone https://github.com/Agilatech/gpout.git
 ```
 const driver = require('@agilatech/gpout');
 
-// create an instance 
-const gpout = new driver();
+// creation of an instance will throw an exception if unable to connect to given gpio
+try {
+    // gpio IS MANDATORY PARAMETER. Typically will be a pin number
+    const gpout = new driver(gpio); 
+}
+catch {
+    console.err("Failed to create gpout instance");
+}
 ```
 #####Get basic device info
 ```
@@ -29,19 +35,20 @@ const active = gpout.deviceActive(); // true if active, false if inactive
 const numVals =  gpout.deviceNumValues(); // returns the number of paramters sensed
 ```
 ####Send command to device
-This device understands three commands:
+This device accepts commands in order to switch the level state of the gpio. Use the sendCommand function in either its synchronous or asynchronous form, with the single required parameter describing the desired action.
+The command parameter may take one of three forms:
 1. high : sets the gpio output to high (also thought of as 1 or true)
 2. low : sets the gpio output to low (also thought of as 0 or false)
 3. toggle : flips the gpio output to the opposite of the current condition
 
 Two functions accept commands, one syncronous and the other asynchronous
 1. sendCommandSync(command) : synchronously send the string command
-2. sendCommand(command, callback) : asynchronously send the string command, with the callback fucntion receiving err, status upon completion. Status is a numerical result, 1=successfull command, 0=N/A command, -1=bad command.
+2. sendCommand(command, callback) : asynchronously send the command string, with the callback fucntion receiving err, status upon completion. 
 
 ```
 gpout.sendCommandSync('high');
 
-// or asynchronously
+// or asynchronously sendCommand(cmd, callback)
 gpout.sendCommand('toggle', function(err, status) {
     if (err) {
             console.err(`Error! ${err}`);
@@ -51,6 +58,8 @@ gpout.sendCommand('toggle', function(err, status) {
         }
     });
 }
+
+The return value is a numerical result, 1=successfull command, 0=N/A command, -1=bad command. The asynchronous version returns this result in the status parameter of the callback.
 ```
 
 ####Get parameter info and values
@@ -84,8 +93,8 @@ gpout.watchValueAtIndex(0, function(err, val) {
 
 ###Operation Notes
 This class module is a general purpose output driver.  It is intended to be a generic driver to simply operate
-a GPIO.  It makes no assumptions about what real-world function the GPIO may be doing, whether controlling a
-single LED or operating coolant valves on a nuclear power plant.  It is intended for use with the Agilatech VersaLink IIoT system, but has a simple and generic enough API to be used by most anything.
+a single GPIO.  It makes no assumptions about what real-world function the GPIO may be doing, whether controlling a
+small LED or operating coolant valves on a nuclear power plant.  It is intended for use with the Agilatech VersaLink IIoT system, but has a simple and generic enough API to be used by most anything.
 
 
 ###Copyright

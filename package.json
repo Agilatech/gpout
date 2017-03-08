@@ -9,7 +9,7 @@
   },
   "keywords": [
     "sensor",
-    "gpout",
+    "gpio",
     "beaglebone",
     "raspberry pi"
   ],

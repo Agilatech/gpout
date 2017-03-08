@@ -42,6 +42,10 @@ module.exports = class Gpout {
 		return "1.0.0";
 	}
 
+	deviceActive() {
+		return this.active;
+	}
+	
 	deviceNumValues() {
 		return this.valueNames.length;
 	}
@@ -62,10 +66,6 @@ module.exports = class Gpout {
     	else {
 			return this.valueNames[index];
 		}
-	}
-
-	deviceActive() {
-		return this.active;
 	}
 
 	// Checks the command, then checks to see if it applies, then returns status.
@@ -156,12 +156,6 @@ module.exports = class Gpout {
 	watchValueAtIndex(index, callback) {
 		this.callbacks[index] = callback;
 	}
-
-	resetValueAtIndex(index) {
-		if (this.values[index] !== 'undefined') {
-			this.values[index] = 0;
-		}
-    }
     
 }
 
